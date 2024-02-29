@@ -54,28 +54,6 @@ def DBmenu():
 #Listar el titulo de todos los libros editados.
 
 
-def listadolibroseditPS(db):
-    sql = "SELECT Titulo FROM documentos WHERE Codigo IN (SELECT CodDocumento FROM libros WHERE CodDocumento IN (SELECT CodDocumento FROM libroseditados));"
-    cursor = db.cursor()
-
-    try:
-        cursor.execute(sql)
-        registros = cursor.fetchall()
-        
-        if cursor.rowcount > 0:
-            print("\nSe encuentran registrados los siguientes títulos de libros editados:")
-            print("-------------------------------------------------------------------------\n")
-
-            for registro in registros:
-                print("-", registro[0])
-            print("\nTotal de libros editados registrados:", cursor.rowcount)
-        
-        else:
-            print("No hay libros editados registrados")
-    
-    except:
-        print("Se ha producido un error en la consulta")
-
 def listadolibrosedit(db):
     sql = "SELECT Titulo FROM documentos WHERE Codigo IN (SELECT CodDocumento FROM libros WHERE CodDocumento IN (SELECT CodDocumento FROM libroseditados));"
     cursor = db.cursor()
